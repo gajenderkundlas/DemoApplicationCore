@@ -16,17 +16,28 @@ namespace Demoapplication.Model
     {
         [Key]
         public int ID { get; set; }
+
         [MaxLength(50)]
         [Required]
+        [Display(Name = "Student Name")]
         public string Name { get; set; }
-        [MaxLength(50)]
-        public string Email { get; set; }
+
         [MaxLength(50)]
         [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [MaxLength(10)]
+        [Required]
+        [Display(Name="Contact No.")]
         public string ContactNo { get; set; }
-        public decimal Marks { get; set; } = 0;
+
+        [Required]
+        public decimal Marks { get; set; }
+
         [MaxLength(50)]
-        public string FatherName { get; set; } = "myname";
+        [Display(Name = "Father Name")]
+        public string FatherName { get; set; }
     }
     
 }

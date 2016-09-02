@@ -1,0 +1,44 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<Demoapplication.Model.StudentInformation>
+<div id="SearchResult">
+    <div class="col-md-12"><h3>Student List</h3></div>
+
+    <div class="col-md-4"><input type="text" id="Search" class="form-control" /></div>
+    <div class="col-md-8">
+        <input type="button" id="btnSearch" value="Search Student" class="btn-default" onclick="Search('normal')" />
+        <input type="button" id="btnTop10" class="btn-default" value="Top 10" onclick="Search('top')" />
+        <input type="button" id="btnBottom10" class="btn-default" value="Bottom 10" onclick="Search('bottom')" />
+    </div>
+
+    <div style="float:right"><h3><a class="glyphicon-edit" asp-controller="student" asp-action="add" asp-route-id="0">Add New</a></h3></div>
+    <div>
+        <table class="table" cellpadding="5" cellspacing="5">
+            <tr>
+                <th>Student Name</th>
+                <th>Father Name</th>
+                <th>Contact No.</th>
+                <th>Email</th>
+                <th>Marks</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.FatherName</td>
+                    <td>@item.ContactNo</td>
+                    <td>@item.Email</td>
+                    <td>@item.Marks</td>
+                    <td>
+                        <a asp-controller="Student" asp-action="Add" asp-route-id="@item.ID">Edit</a>&nbsp;
+                        <a href="javascript:void(0)" onclick="deleteStudent(@item.ID)">Delete</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

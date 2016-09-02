@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model Demoapplication.Model.StudentInformation
+
+<html>
+    <head></head>
+<body>
+ <h3>Student Information</h3>
+ <form asp-controller="student" asp-action="SaveUpdate">
+
+     <div class="form-horizontal">
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         <div class="form-group">
+             <input type="hidden" asp-for="@Model.ID" />
+             <input type="hidden" id="dataType" value="view" name="dataType" />
+             <label asp-for="@Model.Name" class="col-md-2"></label>
+             <div class="col-md-10">
+                 <input value="@Model.Name" asp-for="@Model.Name" class="form-control" />
+                 <span asp-validation-for="@Model.Name" class="text-danger"></span>
+             </div>
+         </div>
+         <div class="form-group">
+             <label asp-for="@Model.FatherName" class="col-md-2"></label>
+             <div class="col-md-10">
+                 <input value="@Model.FatherName" asp-for="@Model.FatherName" class="form-control" />
+             </div>
+         </div>
+         <div class="form-group">
+             <label asp-for="@Model.ContactNo" class="col-md-2"></label>
+             <div class="col-md-10">
+                <input value="@Model.ContactNo" asp-for="@Model.ContactNo" class="form-control" />
+                 <span asp-validation-for="@Model.ContactNo" class="text-danger"></span>
+             </div>
+         </div>
+         <div class="form-group">
+              <label asp-for="@Model.Email" class="col-md-2"></label>
+             <div class="col-md-10">
+                 <input value="@Model.Email" asp-for="@Model.Email" class="form-control" />
+                 <span asp-validation-for="@Model.Email" class="text-danger"></span>
+             </div>
+         </div>
+         <div class="form-group">
+             <label asp-for="@Model.Marks" class="col-md-2"></label>
+             <div class="col-md-10">
+                <input value="@Model.Marks" asp-for="@Model.Marks" class="form-control" />
+                <span asp-validation-for="@Model.Marks" class="text-danger"></span>
+             </div>
+         </div>
+         <div class="form-group">
+             <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="glyphicon-save btn-default" />
+                <a asp-controller="Student" asp-action="Index"  value="Cancel" class="glyphicon-save btn-warning"></a>
+             </div>
+         </div>
+     </div>
+ </form>
+</body>
+</html>
+
