@@ -12,10 +12,11 @@ using Demoapplication.Model;
 
 namespace Demoapplication
 {
-    public class Startup
+    public class StartupNew
     {
         public static string ConnectionString { get; private set;}
-        public Startup(IHostingEnvironment env)
+        public IConfigurationRoot Configuration { get; }
+        public StartupNew(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -26,7 +27,7 @@ namespace Demoapplication
             ConnectionString = Configuration.GetValue<string>("Data:connectionString");
         }
 
-        public IConfigurationRoot Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

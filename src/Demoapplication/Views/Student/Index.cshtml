@@ -7,11 +7,15 @@
 <div id="SearchResult">
     <div class="col-md-12"><h3>Student List</h3></div>
 
-    <div class="col-md-4"><input type="text" id="Search" class="form-control" /></div>
+    <div class="col-md-4"><input type="text" value="@ViewBag.SearchStudent" placeholder="Search By Student Name" id="Search" class="form-control" /></div>
     <div class="col-md-8">
-        <input type="button" id="btnSearch" value="Search Student" class="btn-default" onclick="Search('normal')" />
+        <input type="button" id="btnSearch" value="Search Student" class="btn-default"  onclick="Search('normal')" />
         <input type="button" id="btnTop10" class="btn-default" value="Top 10" onclick="Search('top')" />
         <input type="button" id="btnBottom10" class="btn-default" value="Bottom 10" onclick="Search('bottom')" />
+        
+       
+        <input type="hidden" value="@ViewBag.PageSize" id="hdnPageSize" />
+        <input type="hidden" value="@ViewBag.hdnTotalRecord" id="hdnTotalRecord" />
     </div>
 
     <div style="float:right"><h3><a class="glyphicon-edit" asp-controller="student" asp-action="add" asp-route-id="0">Add New</a></h3></div>
@@ -41,4 +45,6 @@
             }
         </table>
     </div>
+    <div class="col-md-2 col-lg-offset-10">
+    <input type="button" id="btnPrev" class="btn-default" @if (ViewBag.PageSize == 1){<text>disabled = "disabled";</text>}  value="Prev" onclick="Prev()" /> @ViewBag.PageSize of @ViewBag.TotalPage <input type="button" id="btnNext" class="btn-default" @if (ViewBag.PageSize == ViewBag.TotalPage){<text>disabled = "disabled";</text>} value="Next" onclick="Next()" /></div>
 </div>

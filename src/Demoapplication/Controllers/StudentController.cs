@@ -18,10 +18,11 @@ namespace Demoapplication.Controllers
         // GET: /<controller>/
         public IActionResult Index(string dataType, string searchStudent,int pagesize,int total,string orderby)
         {
+           
             dataType = dataType ?? "View";
             searchStudent = searchStudent ?? "";
-            pagesize = pagesize==0 ? 1:pagesize;
-            total = total == 0 ? 1000 : total;
+             pagesize = pagesize==0 ? 1:pagesize;
+            total = total == 0 ? 5 : total;
             List<StudentInformation> studentList;
             if (orderby == "desc")
             {
@@ -34,11 +35,28 @@ namespace Demoapplication.Controllers
                                                 .OrderBy(x => x.Marks)
                                                 .ToList();
             }
-            
+            ViewBag.hdnTotalRecord = studentList.Count();
+            ViewBag.PageSize = pagesize;
+            ViewBag.TotalPage = Math.Ceiling(Convert.ToDecimal(studentList.Count()) / total);
+            ViewBag.SearchStudent = searchStudent;
+            studentList = studentList.Skip(total * (pagesize-1)).Take(total).ToList();
             if (dataType == "json")
                 return Json(studentList);
             else
                 return View(studentList);
+        }
+        public int Delete(int ID) {
+            int SuccessResult = 0;
+            try {
+                StudentInformation objStudent = _dbContext.StudentInformation.Where(o => o.ID == ID).SingleOrDefault();
+                _dbContext.Entry(objStudent).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                _dbContext.SaveChanges();
+                SuccessResult = 1;
+            } catch (Exception) {
+                SuccessResult = 0;
+
+            }
+            return SuccessResult;
         }
         public IActionResult Add(int id) {
             StudentInformation student=new StudentInformation();
@@ -56,7 +74,7 @@ namespace Demoapplication.Controllers
             return View(student);
         }
         [HttpPost]
-        public void SaveUpdate(StudentInformation objStudent) {
+        public ActionResult SaveUpdate(StudentInformation objStudent) {
                 if (ModelState.IsValid)
                 {
 
@@ -79,7 +97,7 @@ namespace Demoapplication.Controllers
                     }
                 }
                 _dbContext.SaveChanges();
-            RedirectToAction("Index",new {dataType="View"});
+            return RedirectToAction("Index", new {dataType="View"}); 
         }
     }
 }
