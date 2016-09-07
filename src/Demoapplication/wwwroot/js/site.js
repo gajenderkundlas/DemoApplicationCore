@@ -83,8 +83,9 @@ function Search(type) {
         success: function (data) {
             $("#SearchResult").html(data);
         },
-        error: function (xhrstatus) {
-            alert(xhrstatus.errorMessage);
+        error: function (xhr,status,error) {
+          var err=eval("("+xhr.responseText+")")
+          alert(err.Message);
         }
     })
 }

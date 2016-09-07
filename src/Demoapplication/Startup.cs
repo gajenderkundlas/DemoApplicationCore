@@ -12,11 +12,11 @@ using Demoapplication.Model;
 
 namespace Demoapplication
 {
-    public class StartupNew
+    public class Startup
     {
         public static string ConnectionString { get; private set;}
         public IConfigurationRoot Configuration { get; }
-        public StartupNew(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)

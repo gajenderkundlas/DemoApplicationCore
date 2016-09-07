@@ -15,7 +15,7 @@ namespace Demoapplication
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<StartupNew>()
+                .UseStartup<Startup>()
                 .Build();
 
             host.Run();
